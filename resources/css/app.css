@@ -1,0 +1,291 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Fieldnote: editorial serif headlines, quiet sans body, paper-white pages. */
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Newsreader', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+    --font-display: 'Newsreader', ui-serif, Georgia, Cambria, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Neutral greys with a faint warm cast */
+    --color-zinc-50: #fafaf9;
+    --color-zinc-100: #f4f4f2;
+    --color-zinc-200: #e7e6e2;
+    --color-zinc-300: #d4d2cc;
+    --color-zinc-400: #a3a19a;
+    --color-zinc-500: #737069;
+    --color-zinc-600: #57544e;
+    --color-zinc-700: #403e39;
+    --color-zinc-800: #292824;
+    --color-zinc-900: #1a1917;
+    --color-zinc-950: #0e0d0c;
+
+    /* Brand: a single vermilion accent, used sparingly. 600+ is text-safe on white. */
+    --color-brand-50: #fdf3ef;
+    --color-brand-100: #fbe3da;
+    --color-brand-200: #f6c4b1;
+    --color-brand-300: #ef9c7f;
+    --color-brand-400: #e7704d;
+    --color-brand-500: #dc5330;
+    --color-brand-600: #c2410c;
+    --color-brand-700: #9f3510;
+    --color-brand-800: #812c13;
+    --color-brand-900: #6a2713;
+    --color-brand-950: #3a1107;
+
+    /* Semantic surface tokens */
+    --color-paper: #ffffff;
+    --color-surface: #ffffff;
+    --color-soft: #f7f6f3;
+    --color-line: #e7e6e2;
+    --color-ink: #141311;
+    --color-body: #3a3834;
+    --color-muted: #75726b;
+
+    --color-accent: var(--color-ink);
+    --color-accent-content: var(--color-ink);
+    --color-accent-foreground: var(--color-white);
+
+    /* Squarer corners than earlier sites */
+    --radius-lg: 0.25rem;
+    --radius-xl: 0.25rem;
+    --radius-2xl: 0.375rem;
+    --radius-3xl: 0.5rem;
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-line, currentColor);
+    }
+
+    html {
+        color-scheme: light;
+    }
+}
+
+@layer components {
+    /* Small label above headings: uppercase, tracked, with a short rule */
+    .eyebrow {
+        @apply inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.18em] text-muted uppercase;
+    }
+
+    .eyebrow::before {
+        content: '';
+        @apply h-px w-6 bg-brand-600;
+    }
+
+    .display {
+        @apply font-serif font-normal tracking-[-0.015em] text-ink;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 bg-ink px-6 py-3 text-sm font-medium text-white transition hover:bg-brand-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
+    }
+
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 border border-ink px-6 py-3 text-sm font-medium text-ink transition hover:bg-ink hover:text-white;
+    }
+
+    /* Category label: plain small caps text, no pill */
+    .chip {
+        @apply inline-flex w-fit items-center bg-white px-2 py-1 text-[10px] font-semibold tracking-[0.14em] text-ink uppercase;
+    }
+
+    .tag {
+        @apply inline-flex w-fit items-center gap-1.5 text-[11px] font-semibold tracking-[0.16em] text-brand-600 uppercase;
+    }
+
+    .card {
+        @apply border border-line bg-surface;
+    }
+
+    .link-underline {
+        @apply underline decoration-line decoration-1 underline-offset-4 transition hover:decoration-ink;
+    }
+
+    .rule-top {
+        @apply border-t border-ink;
+    }
+}
+
+/* Rendered article Markdown (App\Support\ArticleMarkdown) */
+@layer components {
+    .article-body {
+        @apply text-[1.0625rem] leading-[1.8] text-body;
+    }
+
+    .article-body > * + * {
+        @apply mt-6;
+    }
+
+    .article-body h2 {
+        @apply mt-14 scroll-mt-28 font-serif text-[2rem] leading-tight font-normal tracking-[-0.015em] text-ink;
+    }
+
+    .article-body h3 {
+        @apply mt-10 scroll-mt-28 font-serif text-[1.4rem] leading-snug font-medium text-ink;
+    }
+
+    .article-body h4 {
+        @apply mt-8 text-lg font-semibold text-ink;
+    }
+
+    .article-body h2 + *,
+    .article-body h3 + *,
+    .article-body h4 + * {
+        @apply mt-4;
+    }
+
+    .article-body strong {
+        @apply font-semibold text-ink;
+    }
+
+    .article-body code {
+        @apply rounded-md bg-soft px-1.5 py-0.5 font-mono text-[0.9em] text-ink;
+    }
+
+    .article-body a:not(.btn-primary) {
+        @apply font-medium text-ink underline decoration-brand-300 decoration-1 underline-offset-4 transition hover:decoration-brand-600;
+    }
+
+    .article-body ul {
+        @apply space-y-3;
+    }
+
+    .article-body ul > li {
+        @apply relative pl-6;
+    }
+
+    .article-body ul > li::before {
+        content: '';
+        @apply absolute top-[0.8em] left-0.5 h-px w-3 bg-brand-600;
+    }
+
+    .article-body ol {
+        counter-reset: step;
+        @apply space-y-4;
+    }
+
+    .article-body ol > li {
+        counter-increment: step;
+        @apply relative pl-10;
+    }
+
+    .article-body ol > li::before {
+        content: counter(step);
+        @apply absolute top-0 left-0 font-serif text-lg leading-[1.6] text-brand-600;
+    }
+
+    .article-body li > ul,
+    .article-body li > ol {
+        @apply mt-3;
+    }
+
+    .article-body blockquote {
+        @apply border-l-2 border-ink py-1 pl-6 font-serif text-xl leading-relaxed text-ink italic;
+    }
+
+    .article-body hr {
+        @apply my-12 border-line;
+    }
+
+    .article-body .table-wrap {
+        @apply overflow-x-auto border-y border-ink bg-surface;
+    }
+
+    .article-body table {
+        @apply w-full border-collapse text-left text-sm leading-relaxed;
+    }
+
+    .article-body th {
+        @apply px-4 py-3 text-xs font-semibold tracking-[0.1em] text-ink uppercase sm:px-5;
+    }
+
+    .article-body td {
+        @apply border-t border-line px-4 py-3 align-top sm:px-5;
+    }
+
+    .article-body td:first-child {
+        @apply font-medium text-ink;
+    }
+
+    .article-body em {
+        @apply text-body;
+    }
+
+    .article-body .references {
+        @apply mt-16 border-t border-line pt-8 text-sm leading-relaxed text-muted;
+    }
+
+    .article-body .references h2 {
+        @apply mt-0 text-xs font-semibold tracking-[0.12em] text-muted uppercase;
+    }
+
+    .article-body .references ul {
+        @apply mt-5 space-y-2.5;
+    }
+
+    .article-body .references li {
+        @apply pl-5;
+    }
+
+    .article-body .references li::before {
+        @apply top-[0.65em] left-0 size-1 bg-muted;
+    }
+
+    .article-body .references a {
+        @apply text-sm;
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Homepage hero: rotating article slides. The timer bar's animationend
+   advances the slide, so pausing the animation (hover/focus) pauses rotation. */
+@keyframes hero-timer {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.hero-timer {
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+.hero-timer.is-running {
+    animation: hero-timer 5s linear forwards;
+}
+
+.hero-rotator:hover .hero-timer,
+.hero-rotator:focus-within .hero-timer {
+    animation-play-state: paused;
+}
