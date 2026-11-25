@@ -1,0 +1,33 @@
+{
+  "_fonts-B3P6LYnf.css": {
+    "file": "assets/fonts-B3P6LYnf.css",
+    "src": "_fonts-B3P6LYnf.css"
+  },
+  "_instrument-sans-variable-normal-BbzFLZTg.woff2": {
+    "file": "assets/instrument-sans-variable-normal-BbzFLZTg.woff2",
+    "src": "_instrument-sans-variable-normal-BbzFLZTg.woff2"
+  },
+  "_newsreader-variable-italic-Bxi8ein9.woff2": {
+    "file": "assets/newsreader-variable-italic-Bxi8ein9.woff2",
+    "src": "_newsreader-variable-italic-Bxi8ein9.woff2"
+  },
+  "_newsreader-variable-normal-CCVVNp6i.woff2": {
+    "file": "assets/newsreader-variable-normal-CCVVNp6i.woff2",
+    "src": "_newsreader-variable-normal-CCVVNp6i.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DptDjG-O.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BvRk9kiK.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
